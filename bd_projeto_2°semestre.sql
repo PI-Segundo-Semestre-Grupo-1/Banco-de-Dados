@@ -13,6 +13,7 @@ cargo varchar(45)
 
 create table hospital (
 id_hospital int primary key auto_increment,
+id_usuario int not null,
 nome varchar(100) not null,
 cnpj char(14),
 cep char(9),
@@ -55,7 +56,7 @@ percentual_uso decimal(5,2),
 memoria_total decimal(10,2),
 memoria_disponivel decimal(10,2),
 data_hora datetime not null,
-constraint fk_equipamento foreign key (id_equipamento)
+constraint fk_equipamento2 foreign key (id_equipamento)
 references equipamento(id_equipamento)
 );
 
@@ -66,7 +67,7 @@ percentual_uso decimal(5,2),
 espaco_total decimal(10,2),
 espaco_disponivel decimal(10,2),
 data_hora datetime not null,
-constraint fk_equipamento foreign key (id_equipamento)
+constraint fk_equipamento3 foreign key (id_equipamento)
 references equipamento(id_equipamento)
 );
 
@@ -79,6 +80,6 @@ valor_atual decimal(10,2),
 limite decimal(10,2),
 data_hora datetime not null,
 status_atual varchar(20),
-constraint fk_equipamento foreign key (id_equipamento)
+constraint fk_equipamento4 foreign key (id_equipamento)
 references equipamento(id_equipamento)
 );
