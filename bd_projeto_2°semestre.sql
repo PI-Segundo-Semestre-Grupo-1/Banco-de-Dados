@@ -1,5 +1,5 @@
-create database monitoramento_rm;
-use monitoramento_rm;
+create database magnasync_rm;
+use magnasync_rm;
 
 create table usuario (
 id_usuario int primary key auto_increment,
