@@ -21,6 +21,7 @@ rua varchar(45),
 cidade varchar(45),
 estado char(2),
 telefone varchar(45),
+codigo_hospital varchar(10) not null,
 constraint fk_usuario foreign key (id_usuario)
 references usuario(id_usuario)
 );
@@ -38,13 +39,14 @@ constraint fk_hospital foreign key (id_hospital)
 references hospital(id_hospital)
 );
 
+
 create table registroCpu (
 id_cpu int primary key auto_increment,
 id_equipamento int not null,
 percentual_uso decimal(5,2),
 frequencia decimal(10,2),
 nucleos int,
-data_hora datetime not null,
+data_hora datetime not null default current_timestamp,
 constraint fk_equipamento foreign key (id_equipamento)
 references equipamento(id_equipamento)
 );
@@ -68,6 +70,17 @@ espaco_total decimal(10,2),
 espaco_disponivel decimal(10,2),
 data_hora datetime not null,
 constraint fk_equipamento3 foreign key (id_equipamento)
+references equipamento(id_equipamento)
+);
+
+create table registroRedes(
+id_armazenamento int primary key auto_increment,
+id_equipamento int not null,
+wifi_ativo varchar(10),
+ip_rede varchar(15),
+velocidade decimal(10,2),
+data_hora datetime not null,
+constraint fk_equipamento5 foreign key (id_equipamento)
 references equipamento(id_equipamento)
 );
 
