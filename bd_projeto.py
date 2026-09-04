@@ -1,5 +1,13 @@
 import mysql.connector as m
 
+conexao = m.connect(
+    host="",
+    user="",
+    password="",
+    database="",
+    use_pure=
+)
+
 cursor = conexao.cursor()
 
 while True:
