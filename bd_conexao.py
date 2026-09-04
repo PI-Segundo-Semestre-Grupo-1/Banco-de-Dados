@@ -3,6 +3,14 @@ import psutil as p
 import time 
 from datetime import datetime
 
+conexao = m.connect(
+    host="",
+    user="",
+    password="",
+    database="",
+    use_pure=
+)
+
 cursor = conexao.cursor()
 
 
