@@ -5,7 +5,6 @@ conexao = m.connect(
     user="aluno",
     password="Jo142365879*",
     database="magnasync_rm",
-    use_pure=True
 )
 
 cursor = conexao.cursor()
@@ -20,8 +19,8 @@ while True:
     print("5 - Ver redes")
     print("6 - Ver timestamp e percentual de CPU")
     print("7 - Ver timestamp e percentual de memória")
-    print("8 - Ver timestamp e percentual de disco")
-    print("9 - Ver timestamp e se a rede está ativa")
+    print("8 - Ver timestamp e se a rede está ativa")
+    print("9 - Ver timestamp e percentual de disco")
     print("10 - Deletar os ultimos 5 registros")
     print("11 - Atualizar os 3 últimos registros para a data atual")
     print("12 - Sair")
@@ -103,6 +102,33 @@ while True:
                 status_espaco_disponivel = "CRITICO"
 
             print(f"ID: {linha[0]} | Uso: {linha[1]}% | Total: {linha[2]:.2f} GB | Disponível: {linha[3]:.2f} GB | Timestamp: {linha[4]} | Status Disco Uso: {status_disco} | Status Disco Espaço Disponível: {status_espaco_disponivel}")
+
+        print("\nRedes")
+
+        comando = "SELECT id_equipamento, wifi_ativo, ip_rede, velocidade, data_hora FROM registroRedes"
+                        
+        cursor.execute(comando)
+        resultados = cursor.fetchall()
+                               
+        for linha in resultados:
+                        
+                if linha[1] == "Ativo":
+                    status_rede = "NORMAL"
+                elif linha[1] == "Inativo":
+                    status_rede = "CRITICO"
+                else:
+                    status_rede = "CRITICO"
+            
+                if linha[3] is None:
+                    status_velocidade = "CRITICO"
+                elif linha[3] >= 100:
+                    status_velocidade = "NORMAL"
+                elif linha[3] >= 50:
+                    status_velocidade = "ALERTA"
+                else:
+                    status_velocidade = "CRITICO"
+                        
+                print(f"ID: {linha[0]} | Wi-Fi Ativo: {linha[1]} | IP: {linha[2]} | Velocidade: {linha[3]} Mbps | Status Rede: {status_rede} | Status Velocidade Rede: {status_velocidade}")
 
         input("\nPressione ENTER para voltar ao menu...")
 
@@ -282,6 +308,7 @@ while True:
         print("\nTimestamp + Wi-fi")
     
         for linha in resultados:
+            status_rede = ""
 
             if linha[0] == "Ativo":
                 status_rede = "NORMAL"
@@ -326,6 +353,10 @@ while True:
 
         comando = "DELETE FROM registroArmazenamento ORDER BY id_armazenamento DESC LIMIT 5"
         cursor.execute(comando)
+
+        comando = "DELETE FROM registroRedes ORDER BY id_rede DESC LIMIT 5"
+        cursor.execute(comando)
+        
                 
         conexao.commit()
                 
@@ -344,6 +375,9 @@ while True:
         cursor.execute(comando)
 
         comando = "UPDATE registroArmazenamento SET data_hora = NOW() ORDER BY id_armazenamento DESC LIMIT 3"
+        cursor.execute(comando)
+
+        comando = "UPDATE registroRedes SET data_hora = NOW() ORDER BY id_rede DESC LIMIT 3"
         cursor.execute(comando)
     
         conexao.commit()

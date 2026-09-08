@@ -74,7 +74,7 @@ references equipamento(id_equipamento)
 );
 
 create table registroRedes(
-id_armazenamento int primary key auto_increment,
+id_rede int primary key auto_increment,
 id_equipamento int not null,
 wifi_ativo varchar(10),
 ip_rede varchar(15),
