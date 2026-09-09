@@ -1,10 +1,10 @@
 import mysql.connector as m
 
 conexao = m.connect(
-    host="127.0.0.1",
-    user="aluno",
-    password="Jo142365879*",
-    database="magnasync_rm",
+    host="",
+    user="",
+    password="",
+    database="",
 )
 
 cursor = conexao.cursor()
