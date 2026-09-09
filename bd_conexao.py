@@ -4,11 +4,11 @@ import time
 from datetime import datetime
 
 conexao = m.connect(
-    host="127.0.0.1",
-    user="aluno",
-    password="Jo142365879*",
-    database="magnasync_rm",
-    use_pure=True
+    host="",
+    user="",
+    password="",
+    database="",
+    use_pure=
 )
 
 cursor = conexao.cursor()
